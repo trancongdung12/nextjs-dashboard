@@ -9,10 +9,13 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
+
+  noStore();
 
   try {
     // Artificially delay a response for demo purposes.
@@ -34,6 +37,7 @@ export async function fetchRevenue() {
 
 export async function fetchLatestInvoices() {
   try {
+    noStore();
     const data = await sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
@@ -54,6 +58,7 @@ export async function fetchLatestInvoices() {
 
 export async function fetchCardData() {
   try {
+    noStore();
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
     // how to initialize multiple queries in parallel with JS.
