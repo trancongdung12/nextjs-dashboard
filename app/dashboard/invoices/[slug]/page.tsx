@@ -1,9 +1,10 @@
 import { fetchCustomers, fetchInvoiceById } from '@/app/lib/data';
+import { getIdFromSlug } from '@/app/lib/utils';
 import { Metadata, ResolvingMetadata } from 'next';
 import React from 'react';
 
 type Props = {
-  params: { id: string };
+  params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
@@ -11,9 +12,10 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const id = params.id;
+  const slug = params.slug;
+  console.log('🤟💋   id:', getIdFromSlug(slug));
 
-  const invoice = await fetchInvoiceById(id);
+  // const invoice = await fetchInvoiceById(id);
 
   return {
     title: 'Iphone 15 Pro Max',
@@ -32,12 +34,12 @@ export async function generateMetadata(
     },
   };
 }
-async function Page({ params }: { params: { id: string } }) {
-  const id = params.id;
+async function Page({ params }: { params: { slug: string } }) {
+  const id = getIdFromSlug(params.slug);
 
   const invoice = await fetchInvoiceById(id);
 
-  return <div>Invoice detail + {invoice?.id}</div>;
+  return <div>Invoice detail + {invoice?.amount}</div>;
 }
 
 export default Page;

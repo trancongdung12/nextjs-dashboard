@@ -1,4 +1,5 @@
 import { Revenue } from './definitions';
+import slugify from 'slugify';
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -66,4 +67,18 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     '...',
     totalPages,
   ];
+};
+
+export const convertSlugUrl = (text: string) => {
+  if (!text) return '';
+  return slugify(text, {
+    lower: true,
+    locale: 'vi',
+  });
+};
+
+export const getIdFromSlug = (slug: string) => {
+  if (!slug) return '';
+  const splitHtml = slug?.split('.html');
+  return splitHtml?.[0]?.split('-id-')?.[1];
 };

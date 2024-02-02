@@ -1,7 +1,26 @@
 import AcmeLogo from '@/app/ui/acme-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Iphone 15 Pro Max',
+  description: 'Mua iphone nhanh lên',
+  openGraph: {
+    title: 'Iphone 15 Pro Max',
+    description: 'Mua iphone nhanh lên',
+    type: 'website',
+    url: 'https://nextjs.org',
+    images: [
+      {
+        url: 'https://salt.tikicdn.com/cache/750x750/ts/product/5e/8e/5a/ffd57c334ad997d311d311be41ef6aa8.png.webp',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+};
 
 export default function Page() {
   return (

@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
+import {
+  formatDateToLocal,
+  formatCurrency,
+  convertSlugUrl,
+} from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 import Link from 'next/link';
 
@@ -111,7 +115,7 @@ export default async function InvoicesTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <Link
-                        href={`/dashboard/invoices/${invoice.id}`}
+                        href={`/dashboard/invoices/${convertSlugUrl(invoice?.name)}-id-${invoice.id}.html`}
                         className="rounded-md border p-2 hover:bg-gray-100"
                       >
                         View
